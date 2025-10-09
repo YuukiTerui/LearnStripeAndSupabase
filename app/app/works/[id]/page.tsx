@@ -17,3 +17,4 @@ const WorkPage = async ({ params }: { params: { id: number } }) => {
 };
 
 export default WorkPage;
+
