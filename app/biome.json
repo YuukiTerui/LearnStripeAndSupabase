@@ -30,7 +30,11 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": {
+          "options": {
+            "identifierOrder": "natural"
+          }
+        }
       }
     }
   }
