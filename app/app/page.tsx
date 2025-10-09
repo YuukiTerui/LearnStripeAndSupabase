@@ -10,13 +10,15 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
+const supabase = createServerComponentClient({ cookies });
+
+const getAllWorks = async () => {
+  const { data: works } = await supabase.from("works").select("*");
+  return works;
+};
+
 export default async function Home() {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data: works, error } = await supabase.from("works").select("*");
-
-  console.log(works);
-  console.log(error);
+  const works = await getAllWorks();
 
   return (
     <main className="w-full max-w-3xl mx-auto my-16 px-2">
