@@ -12,7 +12,8 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "ignore": ["components/ui/*"]
   },
   "linter": {
     "enabled": true,
@@ -25,14 +26,17 @@
     "domains": {
       "next": "recommended",
       "react": "recommended"
-    }
+    },
+    "ignore": ["components/ui/*"]
   },
   "assist": {
     "actions": {
       "source": {
         "organizeImports": {
+          "ignore": ["components/ui/*"],
           "options": {
-            "identifierOrder": "natural"
+            "identifierOrder": "natural",
+            "ignore": ["components/ui/*"]
           }
         }
       }
