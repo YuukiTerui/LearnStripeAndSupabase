@@ -27,9 +27,13 @@ export default function AuthClientButton({
     router.refresh();
   };
 
-  if (session) {
-    return <Button onClick={handleSignOut}>Sign Out</Button>;
-  }
-
-  return <Button onClick={handleSignIn}>Sign In</Button>;
+  return (
+    <>
+      {session ? (
+        <Button onClick={handleSignOut}>Sign Out</Button>
+      ) : (
+        <Button onClick={handleSignIn}>Sign In</Button>
+      )}
+    </>
+  );
 }
