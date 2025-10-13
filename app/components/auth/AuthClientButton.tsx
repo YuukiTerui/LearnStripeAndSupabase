@@ -1,13 +1,35 @@
 "use client";
 
-import type { Session } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/lib/supabase/client";
+import { type Session } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 
-const AuthClientButton = ({ session }: { session: Session | null }) => {
-  const handleSignIn = () => {
-    console.log(session);
-  };
-  return <Button onClick={handleSignIn}>SignIn</Button>;
-};
+export default function AuthClientButton({
+  session,
+}: {
+  session: Session | null;
+}) {
+  const supabase = createClient();
+  const router = useRouter();
 
-export default AuthClientButton;
+  const handleSignIn = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
+  if (session) {
+    return <Button onClick={handleSignOut}>Sign Out</Button>;
+  }
+
+  return <Button onClick={handleSignIn}>Sign In</Button>;
+}
