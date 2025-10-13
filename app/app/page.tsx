@@ -6,13 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Database, Tables } from "@/lib/database.types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-const supabase = createServerComponentClient({ cookies });
+const supabase = createServerComponentClient<Database>({ cookies });
 
-const getAllWorks = async () => {
+const getAllWorks = async (): Promise<Tables<"works">[] | null> => {
   const { data: works } = await supabase.from("works").select("*");
   return works;
 };
