@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 3333",
     "lint": "biome check",
     "format": "biome format --write",
     "gen:db:types": "dotenv -- bash -c 'npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > lib/database.types.ts'"

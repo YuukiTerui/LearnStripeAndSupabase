@@ -7,19 +7,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Database, Tables } from "@/lib/database.types";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  createServerComponentClient,
+  SupabaseClient,
+} from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-const supabase = createServerComponentClient<Database>({ cookies });
-
-const getAllWorks = async (): Promise<Tables<"works">[] | null> => {
+const getAllWorks = async (
+  supabase: SupabaseClient<Database, "public">
+): Promise<Tables<"works">[] | null> => {
   const { data: works } = await supabase.from("works").select("*");
   return works;
 };
 
 export default async function Home() {
-  const works = await getAllWorks();
+  const supabase = createServerComponentClient({ cookies });
+  const works = await getAllWorks(supabase);
 
   return (
     <main className="w-full max-w-3xl mx-auto my-16 px-2">
