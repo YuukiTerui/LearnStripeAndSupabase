@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   const supabase = await createClient();
 
   const data = await request.json();
-  const { id, email } = data;
+  const { id, email } = data.record;
 
   const stripe = new initStripe(process.env.STRIPE_SEACRET_KEY);
   const customer = await stripe.customers.create({

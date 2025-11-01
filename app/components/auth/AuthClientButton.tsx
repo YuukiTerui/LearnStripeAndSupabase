@@ -14,6 +14,7 @@ export default function AuthClientButton({
   const router = useRouter();
 
   const handleSignIn = async () => {
+    console.log("redirectTo:", location.origin);
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
