@@ -14,9 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      premium_content: {
+        Row: {
+          created_at: string
+          id: number
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "premium_content_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "works"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile: {
         Row: {
           created_at: string
+          email: string | null
           id: string
           interval: string | null
           is_subscribed: boolean | null
@@ -24,6 +51,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          email?: string | null
           id?: string
           interval?: string | null
           is_subscribed?: boolean | null
@@ -31,6 +59,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          email?: string | null
           id?: string
           interval?: string | null
           is_subscribed?: boolean | null
