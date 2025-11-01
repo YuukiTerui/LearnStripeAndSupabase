@@ -8,7 +8,8 @@
     "start": "next start --port 3333",
     "lint": "biome check",
     "format": "biome format --write",
-    "gen:db:types": "dotenv -- bash -c 'npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > lib/database.types.ts'"
+    "gen:db:types": "dotenv -- bash -c 'npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > lib/database.types.ts'",
+    "dev:published": "ngrok http 3000"
   },
   "dependencies": {
     "@next/third-parties": "^16.0.1",
