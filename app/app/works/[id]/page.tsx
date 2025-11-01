@@ -7,13 +7,23 @@ const getPremiumContent = async (
   db: SupabaseClient,
   id: string
 ): Promise<string> => {
-  const { data } = await db
+  const data = await db
     .from("premium_content")
     .select("video_url")
     .eq("id", id)
     .single();
-  console.log("video url: ", data);
-  return data?.video_url;
+  console.log("getPremiumContent: ", data);
+  return data.data?.video_url;
+};
+
+const getWorkById = async (db: SupabaseClient, id: string) => {
+  const data = await db
+    .from("works")
+    .select("*")
+    .eq("id", id)
+    .single<Tables<"works">>();
+  console.log("getWorkById", data);
+  return data.data;
 };
 
 const extractYouTubeVideoId = (url: string): string | null => {
@@ -35,13 +45,10 @@ const WorkPage = async ({ params }: { params: any }) => {
   const supabase = await createClient();
   const { id } = await params;
 
-  const { data: work } = await supabase
-    .from("works")
-    .select("*")
-    .eq("id", id)
-    .single<Tables<"works">>();
-
-  const videoUrl = await getPremiumContent(supabase, id);
+  const [work, videoUrl] = await Promise.all([
+    getWorkById(supabase, id),
+    getPremiumContent(supabase, id),
+  ]);
   const videoId = extractYouTubeVideoId(videoUrl);
 
   return (
