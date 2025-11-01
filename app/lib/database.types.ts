@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      profile: {
+        Row: {
+          created_at: string
+          id: string
+          interval: string | null
+          is_subscribed: boolean | null
+          stripe_customer: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          interval?: string | null
+          is_subscribed?: boolean | null
+          stripe_customer?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          interval?: string | null
+          is_subscribed?: boolean | null
+          stripe_customer?: string | null
+        }
+        Relationships: []
+      }
       works: {
         Row: {
           created_at: string
