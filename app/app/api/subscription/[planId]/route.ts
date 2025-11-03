@@ -6,6 +6,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { planId: string } }
 ) {
+  const { planId } = await params;
   const db = await createClient();
 
   const { data } = await db.auth.getUser();
@@ -31,7 +32,7 @@ export async function GET(
     customer: stripe_customer?.stripe_customer!,
     mode: "subscription",
     payment_method_types: ["card"],
-    line_items: [{ price: params.planId, quantity: 1 }],
+    line_items: [{ price: planId, quantity: 1 }],
     success_url: `${req.nextUrl.origin}/payment/success`,
     cancel_url: `${req.nextUrl.origin}/payment/canceled`,
   });
