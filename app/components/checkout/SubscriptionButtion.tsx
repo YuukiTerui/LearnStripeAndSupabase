@@ -10,7 +10,7 @@ export const SubscriptionButtion = ({
   planId: string;
 }) => {
   const handleSubscribed = async () => {
-    await fetch(`http://localhost:3000/api/subscription/${planId}`);
+    const response = await fetch(`/api/subscription/${planId}`);
   };
 
   return (
