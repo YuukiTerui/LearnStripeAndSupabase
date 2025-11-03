@@ -37,7 +37,10 @@ export async function GET(
     cancel_url: `${req.nextUrl.origin}/payment/canceled`,
   });
 
+  //console.log(session);
+
   return NextResponse.json({
     id: session.id,
+    url: session.url,
   });
 }

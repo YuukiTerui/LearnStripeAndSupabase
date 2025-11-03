@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { Button } from "../ui/button";
 
 export const SubscriptionButtion = ({
@@ -11,6 +12,8 @@ export const SubscriptionButtion = ({
 }) => {
   const handleSubscribed = async () => {
     const response = await fetch(`/api/subscription/${planId}`);
+    const data = await response.json();
+    redirect(data.url);
   };
 
   return (
