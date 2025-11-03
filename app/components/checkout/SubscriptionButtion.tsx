@@ -10,11 +10,7 @@ export const SubscriptionButtion = ({
   planId: string;
 }) => {
   const handleSubscribed = async () => {
-    if (isSubscribed) {
-      await fetch(`http://localhost:3000/api/subscription/${planId}`);
-    } else {
-      // ログインページに遷移
-    }
+    await fetch(`http://localhost:3000/api/subscription/${planId}`);
   };
 
   return (
